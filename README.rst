@@ -77,6 +77,22 @@ Example
 
                 set req.http.X-Country-Name = geoip2.country_name("127.0.0.1");
 
+region_code
+------------------------------
+
+Prototype
+        ::
+
+                region_code(STRING S)
+Return value
+        STRING
+Description
+        Returns region code string
+Example
+        ::
+
+                set req.http.X-Region-Code = geoip2.region_code("127.0.0.1");
+
 region_name
 ------------------------------
 

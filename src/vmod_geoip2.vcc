@@ -36,6 +36,9 @@ $Function STRING country_code(PRIV_VCL, STRING)
 ## look up (english) country names
 $Function STRING country_name(PRIV_VCL, STRING)
 
+## look up (english) region codes
+$Function STRING region_code(PRIV_VCL, STRING)
+
 ## look up (english) region names
 $Function STRING region_name(PRIV_VCL, STRING)
 

@@ -1,0 +1,32 @@
+varnishtest "Test a US IP address"
+
+server s1 {
+	rxreq
+	txresp
+} -start
+
+varnish v1 -vcl+backend {
+	import geoip2 from "${vmod_topbuild}/src/.libs/libvmod_geoip2.so";
+
+	sub vcl_init {
+		geoip2.init("/var/lib/mmdb/GeoLite2-City.mmdb");
+	}
+
+	sub vcl_deliver {
+		set resp.http.X-Country-Code = geoip2.country_code("104.33.223.255");
+		set resp.http.X-Country-Name = geoip2.country_name("104.33.223.255");
+		set resp.http.X-Region-Name = geoip2.region_name("104.33.223.255");
+		set resp.http.X-Region-Code = geoip2.region_code("104.33.223.255");
+		set resp.http.X-City-Name = geoip2.city_name("104.33.223.255");
+	}
+} -start
+
+client c1 {
+	txreq -url "/"
+	rxresp
+	expect resp.http.X-Country-Code == US
+	expect resp.http.X-Country-Name == "United States"
+	expect resp.http.X-Region-Name == "California"
+	expect resp.http.X-Region-Code == "CA"
+	expect resp.http.X-City-Name == "Woodland Hills"
+} -run

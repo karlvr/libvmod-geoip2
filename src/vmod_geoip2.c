@@ -185,6 +185,13 @@ vmod_country_name(VRT_CTX, struct vmod_priv *global, const char *ipstr)
 }
 
 VCL_STRING
+vmod_region_code(VRT_CTX, struct vmod_priv *global, const char *ipstr)
+{
+    const char *lookup_path[] = {"subdivisions", "0", "iso_code", NULL};
+    return vmod_lookup(ctx, global, ipstr, lookup_path);
+}
+
+VCL_STRING
 vmod_region_name(VRT_CTX, struct vmod_priv *global, const char *ipstr)
 {
     const char *lookup_path[] = {"subdivisions", "0", "names", "en", NULL};

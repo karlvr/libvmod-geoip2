@@ -43,7 +43,7 @@ Description
 Example
         ::
 
-                geoip.init("/var/lib/mddb/GeoLite2-City.mmdb");
+                geoip2.init("/var/lib/mddb/GeoLite2-City.mmdb");
 
 country_code
 ------------
@@ -59,7 +59,7 @@ Description
 Example
         ::
 
-                set req.http.X-Country-Code = geoip.country_code("127.0.0.1");
+                set req.http.X-Country-Code = geoip2.country_code("127.0.0.1");
 
 country_name
 ------------
@@ -75,7 +75,7 @@ Description
 Example
         ::
 
-                set req.http.X-Country-Name = geoip.country_name("127.0.0.1");
+                set req.http.X-Country-Name = geoip2.country_name("127.0.0.1");
 
 region_name
 ------------------------------
@@ -91,7 +91,7 @@ Description
 Example
         ::
 
-                set req.http.X-Region-Name = geoip.region_name("127.0.0.1");
+                set req.http.X-Region-Name = geoip2.region_name("127.0.0.1");
 
 city_name
 ------------------------------
@@ -107,7 +107,7 @@ Description
 Example
         ::
 
-                set req.http.X-City-Name = geoip.city_name("127.0.0.1");
+                set req.http.X-City-Name = geoip2.city_name("127.0.0.1");
 
 
 INSTALLATION

@@ -1,4 +1,4 @@
-$Module geoip 3 "Geolocate IP addresses"
+$Module geoip2 3 "Geolocate IP addresses"
 
 This Varnish module makes it possible to look up the originating
 country or region of an IP address.
@@ -8,15 +8,15 @@ country or region of an IP address.
 Example::
 
     vcl 4.0;
-    import geoip;
+    import geoip2;
 
     backend default { .host = "192.0.2.11"; .port = "8080"; }
 
     sub vcl_recv {
             # This sets req.http.X-Country-Code to the country code
             # associated with the client IP address.
-            set req.http.X-Country-Code = geoip.country_code(client.ip);
-            set req.http.X-Country-Name = geoip.country_name(client.ip);
+            set req.http.X-Country-Code = geoip2.country_code(client.ip);
+            set req.http.X-Country-Name = geoip2.country_name(client.ip);
             # These can be used by the backend server to make country-specific
             # versions. Remember to add X-Country-Code/Name to beresp.http.Vary.
 

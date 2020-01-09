@@ -43,7 +43,7 @@ Description
 Example
         ::
 
-                geoip2.init("/var/lib/mddb/GeoLite2-City.mmdb");
+                geoip2.init("/var/lib/mmdb/GeoLite2-City.mmdb");
 
 country_code
 ------------

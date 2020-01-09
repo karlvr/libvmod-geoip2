@@ -6,18 +6,18 @@ server s1 {
 } -start
 
 varnish v1 -vcl+backend {
-	import geoip from "${vmod_topbuild}/src/.libs/libvmod_geoip2.so";
+	import geoip2 from "${vmod_topbuild}/src/.libs/libvmod_geoip2.so";
 
 	sub vcl_init {
-		geoip.init("/var/lib/mmdb/GeoLite2-City.mmdb");
+		geoip2.init("/var/lib/mmdb/GeoLite2-City.mmdb");
 	}
 
 	sub vcl_deliver {
-		set resp.http.X-Country-Code = geoip.country_code("127.0.0.1");
-		set resp.http.X-Country-Name = geoip.country_name("127.0.0.1");
+		set resp.http.X-Country-Code = geoip2.country_code("127.0.0.1");
+		set resp.http.X-Country-Name = geoip2.country_name("127.0.0.1");
 
-		set resp.http.X-IP-Country-Code = geoip.country_code(client.ip);
-		set resp.http.X-IP-Country-Name = geoip.country_name(client.ip);
+		set resp.http.X-IP-Country-Code = geoip2.country_code(client.ip);
+		set resp.http.X-IP-Country-Name = geoip2.country_name(client.ip);
 	}
 } -start
 

@@ -1,4 +1,4 @@
-$Module geoip 3 Geolocate IP addresses
+$Module geoip 3 "Geolocate IP addresses"
 
 This Varnish module makes it possible to look up the originating
 country or region of an IP address.

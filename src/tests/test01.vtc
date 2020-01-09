@@ -6,7 +6,11 @@ server s1 {
 } -start
 
 varnish v1 -vcl+backend {
-	import geoip from "${vmod_topbuild}/src/.libs/libvmod_geoip.so";
+	import geoip from "${vmod_topbuild}/src/.libs/libvmod_geoip2.so";
+
+	sub vcl_init {
+		geoip.init("/var/lib/mmdb/GeoLite2-City.mmdb");
+	}
 
 	sub vcl_deliver {
 		set resp.http.X-Country-Code = geoip.country_code("127.0.0.1");
@@ -20,8 +24,8 @@ varnish v1 -vcl+backend {
 client c1 {
 	txreq -url "/"
 	rxresp
-	expect resp.http.X-Country-Code == Unknown
-	expect resp.http.X-Country-Name == Unknown
-	expect resp.http.X-IP-Country-Code == Unknown
-	expect resp.http.X-IP-Country-Name == Unknown
+	expect resp.http.X-Country-Code == ""
+	expect resp.http.X-Country-Name == ""
+	expect resp.http.X-IP-Country-Code == ""
+	expect resp.http.X-IP-Country-Name == ""
 } -run

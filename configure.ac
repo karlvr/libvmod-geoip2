@@ -1,7 +1,7 @@
 AC_PREREQ(2.64)
-AC_INIT([libvmod-geoip], [1.0.3], [opensource@varnish-software.com], [libvmod-geoip])
+AC_INIT([libvmod-geoip2], [1.0.3], [opensource@varnish-software.com], [libvmod-geoip2])
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_SRCDIR(src/vmod_geoip.vcc)
+AC_CONFIG_SRCDIR(src/vmod_geoip2.vcc)
 AM_CONFIG_HEADER(config.h)
 
 AC_CANONICAL_SYSTEM
@@ -30,7 +30,7 @@ AM_CONDITIONAL(HAVE_RST2MAN, [test "x$RST2MAN" != "xno"])
 
 # Check for pkg-config
 PKG_PROG_PKG_CONFIG
-PKG_CHECK_MODULES([libGeoIP], [geoip])
+PKG_CHECK_MODULES([libmaxminddb], [libmaxminddb])
 
 # Checks for header files.
 AC_HEADER_STDC

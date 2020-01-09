@@ -28,7 +28,7 @@ Example::
 
 .. vcl-end
 
-$Event event
+$Function INT init(PRIV_VCL, STRING)
 
 ## look up two-letter country codes
 $Function STRING country_code(PRIV_VCL, STRING)
@@ -37,4 +37,7 @@ $Function STRING country_code(PRIV_VCL, STRING)
 $Function STRING country_name(PRIV_VCL, STRING)
 
 ## look up (english) region names
-#$Function STRING region_name(PRIV_VCL, STRING)
+$Function STRING region_name(PRIV_VCL, STRING)
+
+## look up (english) city names
+$Function STRING city_name(PRIV_VCL, STRING)

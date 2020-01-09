@@ -29,6 +29,22 @@ and using code from https://github.com/nytm/varnish-mmdb-vmod
 FUNCTIONS
 =========
 
+init
+----
+
+Prototype
+        ::
+
+                init(STRING mmdb_path)
+Return value
+        INT
+Description
+        Load an mmdb file.
+Example
+        ::
+
+                geoip.init("/var/lib/mddb/GeoLite2-City.mmdb");
+
 country_code
 ------------
 
@@ -126,3 +142,4 @@ Make targets:
 
 Database:
 
+The tests rely on an mmdb being available at /var/lib/mmdb/GeoLite2-City.mmdb

@@ -73,7 +73,7 @@ geo_lookup(MMDB_s *const mmdb_handle, const char *ipstr, const char **lookup_pat
 		MMDB_lookup_string(mmdb_handle, ipstr, &gai_error, &mmdb_error);
 
 	if (0 != gai_error) {
-#ifdef DEBUG
+#if DEBUG
 		fprintf(stderr,
 				"[INFO] Error from MMDB_lookup_string for %s - %s\n\n",
 				ipstr, gai_strerror(gai_error));
@@ -82,7 +82,7 @@ geo_lookup(MMDB_s *const mmdb_handle, const char *ipstr, const char **lookup_pat
 	}
 
 	if (MMDB_SUCCESS != mmdb_error) {
-#ifdef DEBUG
+#if DEBUG
 		fprintf(stderr,
 				"[ERROR] Got an error from libmaxminddb: %s\n\n",
 				MMDB_strerror(mmdb_error));
@@ -97,7 +97,7 @@ geo_lookup(MMDB_s *const mmdb_handle, const char *ipstr, const char **lookup_pat
 		int status = MMDB_aget_value(&result.entry, &entry_data, lookup_path);
 
 		if (MMDB_SUCCESS != status) {
-#ifdef DEBUG
+#if DEBUG
 			fprintf(
 				stderr,
 				"[WARN] Got an error looking up the entry data. Make sure \
@@ -123,7 +123,7 @@ geo_lookup(MMDB_s *const mmdb_handle, const char *ipstr, const char **lookup_pat
 				break;
 			}
 			default:
-#ifdef DEBUG
+#if DEBUG
 				fprintf(
 					stderr,
 					"[WARN] No handler for entry data type (%d) was found\n",
@@ -135,7 +135,7 @@ geo_lookup(MMDB_s *const mmdb_handle, const char *ipstr, const char **lookup_pat
 			return NULL;
 		}
 	} else {
-#ifdef DEBUG
+#if DEBUG
 		fprintf(
 			stderr,
 			"[INFO] No entry for this IP address (%s) was found\n",

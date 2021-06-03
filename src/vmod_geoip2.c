@@ -25,8 +25,10 @@
 static MMDB_s mmdb_handle;
 
 // close gets called by varnish when then the threads destroyed
-void close_mmdb(void *mmdb_handle)
+static void close_mmdb(VRT_CTX, void *mmdb_handle)
 {
+	CHECK_OBJ_NOTNULL(ctx, VRT_CTX_MAGIC);
+
 	// don't do anything if the db didn't open correctly.
 	if (mmdb_handle == NULL) {
 		return;
@@ -34,6 +36,12 @@ void close_mmdb(void *mmdb_handle)
 	MMDB_s *handle = (MMDB_s *)mmdb_handle;
 	MMDB_close(handle);
 }
+
+static const struct vmod_priv_methods close_mmdb_vmod_priv_methods[1] = {{
+	.magic = VMOD_PRIV_METHODS_MAGIC,
+	.type = "close_mmdb",
+	.fini = close_mmdb
+}};
 
 VCL_INT
 vmod_init(VRT_CTX, struct vmod_priv *pp, const char *mmdb_path)
@@ -43,7 +51,7 @@ vmod_init(VRT_CTX, struct vmod_priv *pp, const char *mmdb_path)
     int mmdb_baddb = MMDB_open(mmdb_path, MMDB_MODE_MMAP, &mmdb_handle);
     if (mmdb_baddb == MMDB_SUCCESS) {
     	pp->priv = (void *)&mmdb_handle;
-    	pp->free = close_mmdb;
+    	pp->methods = close_mmdb_vmod_priv_methods;
     	return 0;
     } else {
         fprintf(stderr, "[ERROR] MMDB_open: Can't open %s - %s\n",
